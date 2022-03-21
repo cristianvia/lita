@@ -8,7 +8,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="LiTa" component={Home} />
+        <Stack.Screen name="LiTa - Lista de Tareas" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
