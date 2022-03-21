@@ -1,23 +1,40 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 
+const ListButton = ({ title, color }) => {
+    return (
+        <TouchableOpacity onPress={() => { }} style={[styles.itemContainer, { backgroundColor: color }]}>
+            <View><Text style={styles.itemTitle}>{title}</Text></View>
+            <View style={{ flexDirection: "row" }}>
+                <TouchableOpacity onPress={() => { }}>
+                    <Ionicons name="options-outline" size={24} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }}>
+                    <Ionicons name="trash-outline" size={24} color="white" />
+                </TouchableOpacity>
+            </View>
+        </TouchableOpacity>
+    )
+}
+
 export default () => {
     return (
-    <View style={styles.container}>
-        <TouchableOpacity onPress={() => {}} style={styles.itemContainer}>
-            <View><Text style={styles.itemTitle}>Lista 1</Text></View>
-            <View style={{flexDirection:"row"}}>
-                <TouchableOpacity onPress={() => {}}>
-                    <Ionicons name="options-outline" size={24} color="white"/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {}}>
-                    <Ionicons name="trash-outline" size={24} color="white"/>
-                </TouchableOpacity>
-                </View>
-        </TouchableOpacity>
-    </View>)
+        <View style={styles.container}>
+            <FlatList
+                data={
+                    [{ title: "Lista 1", color: Colors.red },
+                    { title: "Lista 2", color: Colors.green },
+                    { title: "Lista 3", color: Colors.blue }
+                    ]}
+                renderItem={({ item: { title, color, index } }) => {
+                    return (
+                        <ListButton title={title} color={color} />
+                    )
+                }}
+            />
+        </View>)
 }
 const styles = StyleSheet.create({
     container: {
@@ -35,7 +52,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 10,
         padding: 15,
-        backgroundColor: Colors.blue,
     },
     icon: {
         padding: 5,
@@ -61,4 +77,3 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
 });
-  
