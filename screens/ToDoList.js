@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ToDoItem from "../components/ToDoItem";
@@ -6,15 +6,15 @@ import Colors from "../constants/Colors";
 
 const renderAddListIcon = (addItem) => {
     return (
-        <TouchableOpacity onPress={() => addItem({text: "Hello2", isChecked: false })}>
+        <TouchableOpacity onPress={() => addItem({ text: "Hello2", isChecked: false })}>
             <Text style={styles.icon}>+</Text>
         </TouchableOpacity>
     )
 }
 
 
-export default ({navigation}) => {
-    const [toDoItems, setToDoItems] = useState([{text: "hello", isChecked: false}]);
+export default ({ navigation }) => {
+    const [toDoItems, setToDoItems] = useState([{ text: "hello", isChecked: false }]);
 
     const addItemToLists = (item) => {
         toDoItems.push(item);
@@ -23,7 +23,12 @@ export default ({navigation}) => {
 
     const removeItemFromLists = (index) => {
         toDoItems.splice(index, 1);
-        setToDoItems([ ...toDoItems ]);
+        setToDoItems([...toDoItems]);
+    }
+
+    const updateItem = (index, item) => {
+        toDoItems[index] = item;
+        setToDoItems([...toDoItems]);
     }
 
     useLayoutEffect(() => {
@@ -36,8 +41,16 @@ export default ({navigation}) => {
     return (<View style={styles.container}>
         <FlatList
             data={toDoItems}
-            renderItem={({ item:{text, isChecked}, index }) => {
-                return (<ToDoItem text={text} isChecked={isChecked}/>)
+            renderItem={({ item: { text, isChecked }, index }) => {
+                return (<ToDoItem
+                    text={text}
+                    isChecked={isChecked}
+                    onCheck={() => {
+                        const toDoItem = toDoItems[index];
+                        toDoItem.isChecked = !isChecked;
+                        updateItem(index, toDoItem);
+                    }}
+                />)
             }}
         />
     </View>

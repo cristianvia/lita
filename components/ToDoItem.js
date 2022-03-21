@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import Checkbox from "./Checkbox";
 import Colors from "../constants/Colors";
 
-export default ({ text, isChecked }) => {
+export default ({ text, isChecked, onChecked }) => {
     return (
-        <View>
-            <Text>{text}</Text>
+        <View style={styles.container}>
+            <View style={{ flexDirection: "row", flex: 1 }}>
+                <Checkbox isChecked={isChecked} onChecked={onChecked}/>
+                <TouchableOpacity onPress={() => {}}>
+                    <Text>{text}</Text>
+                    </TouchableOpacity>
+            </View>
         </View>
     )
 }
