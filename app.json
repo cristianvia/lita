@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "LiTa - Lista de Tareas",
-    "slug": "lita",
+    "name": "LiTapp - Lista de Tareas",
+    "slug": "litapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

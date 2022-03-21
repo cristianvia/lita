@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 
-const ListButton = ({ title, color }) => {
+const ListButton = ({ title, color, navigation }) => {
     return (
-        <TouchableOpacity onPress={() => { }} style={[styles.itemContainer, { backgroundColor: color }]}>
+        <TouchableOpacity onPress={() => { navigation.navigate("ToDoList", { title, color }) }}
+            style={[styles.itemContainer, { backgroundColor: color }]}>
             <View><Text style={styles.itemTitle}>{title}</Text></View>
             <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity onPress={() => { }}>
@@ -19,7 +20,7 @@ const ListButton = ({ title, color }) => {
     )
 }
 
-export default () => {
+export default ({ navigation }) => {
     return (
         <View style={styles.container}>
             <FlatList
@@ -30,7 +31,7 @@ export default () => {
                     ]}
                 renderItem={({ item: { title, color, index } }) => {
                     return (
-                        <ListButton title={title} color={color} />
+                        <ListButton title={title} color={color} navigation={navigation} />
                     )
                 }}
             />
